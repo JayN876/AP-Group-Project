@@ -131,19 +131,19 @@ public class AddDeliveryRequestJPanel {
 
 		panel_1.add(cbxCustomer, "6, 2, fill, default");
 		
-		lblSourceAddress = new JLabel("Source Address");
+		lblSourceAddress = new JLabel("Delivery Route");
 		lblSourceAddress.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_1.add(lblSourceAddress, "2, 4, right, default");
 		
 		cbxSourceAddress = new JComboBox();
 		panel_1.add(cbxSourceAddress, "6, 4, fill, default");
 		
-		lblDestinationAddress = new JLabel("Destination Address");
-		lblDestinationAddress.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblDestinationAddress, "2, 6, default, top");
-		
-		cbxDestinationAddress = new JComboBox();
-		panel_1.add(cbxDestinationAddress, "6, 6, fill, default");
+//		lblDestinationAddress = new JLabel("Destination Address");
+//		lblDestinationAddress.setHorizontalAlignment(SwingConstants.RIGHT);
+//		panel_1.add(lblDestinationAddress, "2, 6, default, top");
+//		
+//		cbxDestinationAddress = new JComboBox();
+//		panel_1.add(cbxDestinationAddress, "6, 6, fill, default");
 		
 		lblPlateNumber = new JLabel("Plate Number");
 		lblPlateNumber.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -193,6 +193,7 @@ public class AddDeliveryRequestJPanel {
 					selectedCustomerId = rep.getCustomerId();
 				}
 				
+				System.out.println(selectedCustomerId);
 			}
 		});
 		GridBagConstraints gbc_btnConfirmRequest = new GridBagConstraints();
