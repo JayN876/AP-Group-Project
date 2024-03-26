@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import beans.CompanyRepresentative;
+import beans.DeliveryDriver;
 import beans.DeliveryRoute;
 import databaseAction.DeliveryRequestAction;
 
@@ -44,12 +45,12 @@ public class AddDeliveryRequestJPanel {
 	private GridBagConstraints gbc;
 	private JLabel lblDeliveryRoute;
 	private JComboBox<CompanyRepresentative> cbxCustomer;
-	private JLabel lblDestinationAddress;
+//	private JLabel lblDestinationAddress;
 	private JComboBox<DeliveryRoute> cbxDeliveryRoute;
 	private JLabel lblCustomer;
-	private JComboBox<?> cbxDestinationAddress;
+//	private JComboBox<?> cbxDestinationAddress;
 	private JLabel lblPlateNumber;
-	private JComboBox<?> cbxPlateNumber;
+	private JComboBox<DeliveryDriver> cbxDeliveryDriver;
 //	private JLabel lblNewLabel_4;
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl dpOrderDate;
@@ -61,6 +62,8 @@ public class AddDeliveryRequestJPanel {
 	
 	
 	private String selectedCustomerId;
+	private String routeId;
+	private String plateNumber;
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -154,8 +157,12 @@ public class AddDeliveryRequestJPanel {
 		lblPlateNumber.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_1.add(lblPlateNumber, "2, 8");
 		
-		cbxPlateNumber = new JComboBox();
-		panel_1.add(cbxPlateNumber, "6, 8, fill, default");
+		List<DeliveryDriver> driversList = deliveryAction.getAllDrivers();
+		DeliveryDriver[] activeDrivers = new DeliveryDriver[driversList.size()];
+		activeDrivers = driversList.toArray(activeDrivers);
+		
+		cbxDeliveryDriver = new JComboBox<DeliveryDriver>(activeDrivers);
+		panel_1.add(cbxDeliveryDriver, "6, 8, fill, default");
 		
 		lblOrderDate = new JLabel("Date of Order");
 		lblOrderDate.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -194,9 +201,20 @@ public class AddDeliveryRequestJPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CompanyRepresentative rep = (CompanyRepresentative) cbxCustomer.getSelectedItem();
+				DeliveryRoute route = (DeliveryRoute)cbxDeliveryRoute.getSelectedItem();
+				DeliveryDriver driver = (DeliveryDriver)cbxDeliveryDriver.getSelectedItem();
 				if(rep != null) {
 					selectedCustomerId = rep.getCustomerId();
 				}
+				
+				if(route != null) {
+					routeId = route.getRouteId();
+				}
+				
+				if(driver != null) {
+					plateNumber = driver.getPlateNumber();
+				}
+				
 				
 				System.out.println(selectedCustomerId);
 			}
