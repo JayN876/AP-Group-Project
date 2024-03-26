@@ -56,7 +56,6 @@ public class DeliveryRequestAction {
 		try {
 			String sql = (String)_properties.get("GET_ALL_DELIVERY_ROUTES");
 			PreparedStatement preparedStatement = myConn.prepareStatement(sql);
-			preparedStatement.setString(1, "active");
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			System.out.println(sql);
