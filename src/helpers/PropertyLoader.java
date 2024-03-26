@@ -4,7 +4,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
-import driver.Main;
 
 public class PropertyLoader {
 	
@@ -19,13 +18,15 @@ public class PropertyLoader {
 
 	public void loadPropertyResource() {
 		this._isLoaded = false;
-		try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(_resourcePropertyName)){
+		
+		try (InputStream inputStream = PropertyLoader.class.getResourceAsStream("/"+_resourcePropertyName);){
 			
 			this._propertProperties.load(inputStream);
 			this._isLoaded = true;
 		} catch (Exception e) {
 			// TODO: handle exception
 			// TODO: add logger here to show
+			e.printStackTrace();
 			this._isLoaded = false;
 		}
 	}
@@ -42,7 +43,7 @@ public class PropertyLoader {
 	
 	public void save() {
 		try {
-			this._propertProperties.store(new FileOutputStream(_resourcePropertyName), null);
+			this._propertProperties.store(new FileOutputStream(PropertyLoader.class.getResource("/"+_resourcePropertyName).getPath()), null);
 		} catch (Exception e) {
 			// TODO: handle exception
 			// TODO: add logger here to show 
