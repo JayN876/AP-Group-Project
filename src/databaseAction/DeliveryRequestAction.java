@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import beans.CompanyRepresentative;
+import beans.DeliveryDriver;
 import beans.DeliveryRoute;
 import helpers.PropertyLoader;
 
@@ -65,6 +66,35 @@ public class DeliveryRequestAction {
 					String route = resultSet.getString("route");
 					DeliveryRoute deliveryRoute = new DeliveryRoute(routeId, route);
 					deliveryRoutes.add(deliveryRoute);
+					
+				}
+			}
+			
+		}catch(Exception e) {
+			//TODO: Add logs and handle error
+			e.printStackTrace();
+			
+		}
+		return deliveryRoutes;
+	}
+	public List<DeliveryDriver> getAllDrivers() {
+		List<DeliveryDriver> deliveryRoutes = new ArrayList<>();
+		
+		try {
+			String sql = (String)_properties.get("GET_ALL_ACTIVE_DRIVERS");
+			PreparedStatement preparedStatement = myConn.prepareStatement(sql);
+			preparedStatement.setString(1, "active");
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			System.out.println(sql);
+			if(resultSet != null) {
+				while (resultSet.next()) {
+					String contractorId = resultSet.getString("contractorId");
+					String fullName = resultSet.getString("fullName");
+					String plateNumber = resultSet.getString("plateNumber");
+					String staffId = resultSet.getString("staffId");
+					DeliveryDriver deliveryDriver = new DeliveryDriver(contractorId,staffId,plateNumber,fullName);
+					deliveryRoutes.add(deliveryDriver);
 					
 				}
 			}
