@@ -45,6 +45,7 @@ public class DashBoard {
 	private InvoiceJPanel invoiceJPanel;
 	private RateSheetJPanel ratePanel;
 	private ViewOutstandingBalanceJPanel balancePanel;
+	private AddDeliveryRequestJPanel addDeliveryPanel;
 	
 	
 	public DashBoard() {
@@ -84,6 +85,17 @@ public class DashBoard {
 		delivery.setFont(new Font(font.getFontName(), font.getStyle(), buttonFont));	
 		delivery.setPreferredSize(new Dimension(buttonWidth,buttonHeight)); 
 		sidebar.add(delivery);
+		
+		delivery.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainPanel.remove(displayPanel);
+				displayPanel = addDeliveryPanel.getPanel();
+				mainPanel.add(displayPanel, gbc);
+				mainPanel.revalidate();
+				mainPanel.repaint();
+			}
+		});
 		
 		//setting Staff Record
 		staffRecord = new JButton("Add Staff Record");
