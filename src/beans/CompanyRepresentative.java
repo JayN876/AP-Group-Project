@@ -27,6 +27,9 @@ public class CompanyRepresentative {
 		this.customer = customer;
 	}
 	
-	
+	@Override 
+	public String toString() {
+		return this.customer;
+	}
 
 }
