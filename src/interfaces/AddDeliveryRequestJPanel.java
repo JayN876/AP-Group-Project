@@ -13,6 +13,13 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import helpers.DateLabelFormatter;
+import helpers.PropertyLoader;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import beans.CompanyRepresentative;
+import databaseAction.DeliveryRequestAction;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JTextField;
@@ -33,21 +40,21 @@ public class AddDeliveryRequestJPanel {
 	private JLabel headingJLabel;
 	private GridBagConstraints gbc;
 	private JLabel lblSourceAddress;
-	private JComboBox cbxCustomer;
+	private JComboBox<CompanyRepresentative> cbxCustomer;
 	private JLabel lblDestinationAddress;
-	private JComboBox cbxSourceAddress;
+	private JComboBox<?> cbxSourceAddress;
 	private JLabel lblCustomer;
-	private JComboBox cbxDestinationAddress;
+	private JComboBox<?> cbxDestinationAddress;
 	private JLabel lblPlateNumber;
-	private JComboBox cbxPlateNumber;
-	private JLabel lblNewLabel_4;
+	private JComboBox<?> cbxPlateNumber;
+//	private JLabel lblNewLabel_4;
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl dpOrderDate;
 	private JPanel panel_2;
 	private JButton btnCancelRequest;
 	private JButton btnConfirmRequest;
 	private JLabel lblOrderDate;
-	private JTextField textField;
+	private DeliveryRequestAction deliveryAction;
 	
 	/**
 	 * @wbp.parser.entryPoint
@@ -112,7 +119,12 @@ public class AddDeliveryRequestJPanel {
 		lblCustomer.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_1.add(lblCustomer, "2, 2");
 		
-		cbxCustomer = new JComboBox();
+		deliveryAction = new DeliveryRequestAction();
+		List<CompanyRepresentative> repsList = deliveryAction.getAllCustomerCompanies();
+		CompanyRepresentative[] reps = new CompanyRepresentative[repsList.size()];
+		reps = repsList.toArray(reps);
+		cbxCustomer = new JComboBox<CompanyRepresentative>(reps);
+
 		panel_1.add(cbxCustomer, "6, 2, fill, default");
 		
 		lblSourceAddress = new JLabel("Source Address");
@@ -182,6 +194,7 @@ public class AddDeliveryRequestJPanel {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		
 	}
 
 }
