@@ -89,6 +89,7 @@ public class DashBoard {
 		delivery.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				addDeliveryPanel = new AddDeliveryRequestJPanel();
 				mainPanel.remove(displayPanel);
 				displayPanel = addDeliveryPanel.getPanel();
 				mainPanel.add(displayPanel, gbc);
