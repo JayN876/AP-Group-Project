@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -56,6 +58,8 @@ public class AddDeliveryRequestJPanel {
 	private JLabel lblOrderDate;
 	private DeliveryRequestAction deliveryAction;
 	
+	
+	private String selectedCustomerId;
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -179,6 +183,18 @@ public class AddDeliveryRequestJPanel {
 		panel_2.add(btnCancelRequest, gbc_btnCancelRequest);
 		
 		btnConfirmRequest = new JButton("Confirm Request");
+		
+		btnConfirmRequest.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CompanyRepresentative rep = (CompanyRepresentative) cbxCustomer.getSelectedItem();
+				if(rep != null) {
+					selectedCustomerId = rep.getCustomerId();
+				}
+				
+			}
+		});
 		GridBagConstraints gbc_btnConfirmRequest = new GridBagConstraints();
 		gbc_btnConfirmRequest.gridx = 2;
 		gbc_btnConfirmRequest.gridy = 0;
