@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import beans.CompanyRepresentative;
-
+import beans.DeliveryRoute;
 import helpers.PropertyLoader;
 
 public class DeliveryRequestAction {
@@ -48,5 +48,33 @@ public class DeliveryRequestAction {
 			
 		}
 		return companies;
+	}
+	
+	public List<DeliveryRoute> getAllDeliveryRoutes() {
+		List<DeliveryRoute> deliveryRoutes = new ArrayList<>();
+		
+		try {
+			String sql = (String)_properties.get("GET_ALL_DELIVERY_ROUTES");
+			PreparedStatement preparedStatement = myConn.prepareStatement(sql);
+			preparedStatement.setString(1, "active");
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			System.out.println(sql);
+			if(resultSet != null) {
+				while (resultSet.next()) {
+					String routeId = resultSet.getString("routeId");
+					String route = resultSet.getString("route");
+					DeliveryRoute deliveryRoute = new DeliveryRoute(routeId, route);
+					deliveryRoutes.add(deliveryRoute);
+					
+				}
+			}
+			
+		}catch(Exception e) {
+			//TODO: Add logs and handle error
+			e.printStackTrace();
+			
+		}
+		return deliveryRoutes;
 	}
 }
