@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import beans.CompanyRepresentative;
+import beans.DeliveryRoute;
 import databaseAction.DeliveryRequestAction;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -41,10 +42,10 @@ public class AddDeliveryRequestJPanel {
 	private JPanel panel;
 	private JLabel headingJLabel;
 	private GridBagConstraints gbc;
-	private JLabel lblSourceAddress;
+	private JLabel lblDeliveryRoute;
 	private JComboBox<CompanyRepresentative> cbxCustomer;
 	private JLabel lblDestinationAddress;
-	private JComboBox<?> cbxSourceAddress;
+	private JComboBox<DeliveryRoute> cbxDeliveryRoute;
 	private JLabel lblCustomer;
 	private JComboBox<?> cbxDestinationAddress;
 	private JLabel lblPlateNumber;
@@ -131,12 +132,16 @@ public class AddDeliveryRequestJPanel {
 
 		panel_1.add(cbxCustomer, "6, 2, fill, default");
 		
-		lblSourceAddress = new JLabel("Delivery Route");
-		lblSourceAddress.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblSourceAddress, "2, 4, right, default");
+		lblDeliveryRoute = new JLabel("Delivery Route");
+		lblDeliveryRoute.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(lblDeliveryRoute, "2, 4, right, default");
 		
-		cbxSourceAddress = new JComboBox();
-		panel_1.add(cbxSourceAddress, "6, 4, fill, default");
+		List<DeliveryRoute> routesList = deliveryAction.getAllDeliveryRoutes();
+		DeliveryRoute[] routes = new DeliveryRoute[routesList.size()];
+		routes = routesList.toArray(routes);
+		
+		cbxDeliveryRoute = new JComboBox<DeliveryRoute>(routes);
+		panel_1.add(cbxDeliveryRoute, "6, 4, fill, default");
 		
 //		lblDestinationAddress = new JLabel("Destination Address");
 //		lblDestinationAddress.setHorizontalAlignment(SwingConstants.RIGHT);
