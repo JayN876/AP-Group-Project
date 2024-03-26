@@ -6,9 +6,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/rober/OneDrive/Desktop/Utech/SEM2/Advanced Programming/Group Project/accessory files/log4j-api-2.22.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/rober/OneDrive/Desktop/Utech/SEM2/Advanced Programming/Group Project/accessory files/log4j-core-2.22.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/rober/OneDrive/Desktop/Utech/SEM2/Advanced Programming/Group Project/accessory files/mysql-connector-j-8.3.0.jar"/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="lib" path="properties"/>
+	<classpathentry kind="lib" path="lib/log4j-api-2.22.1.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-core-2.22.1.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-j-8.3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

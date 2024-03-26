@@ -1,0 +1,12 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar"
+        ],
+        "exclude": [
+            "c:\\Users\\rober\\OneDrive\\Desktop\\Utech\\SEM2\\Advanced Programming\\Group Project\\accessory files\\mysql-connector-j-8.3.0.jar",
+            "c:\\Users\\rober\\OneDrive\\Desktop\\Utech\\SEM2\\Advanced Programming\\Group Project\\accessory files\\log4j-core-2.22.1.jar",
+            "c:\\Users\\rober\\OneDrive\\Desktop\\Utech\\SEM2\\Advanced Programming\\Group Project\\accessory files\\log4j-api-2.22.1.jar"
+        ]
+    }
+}
