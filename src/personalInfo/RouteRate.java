@@ -6,13 +6,15 @@ public class RouteRate {
 	private Address sourceAddress;
 	private Address destinationAddress;
 	private double rate;
+	private double distance;
 	
 	
-	public RouteRate(String routeID, Address sourceAddress, Address destinationAddress, double rate) {
+	public RouteRate(String routeID, Address sourceAddress, Address destinationAddress, double rate,double distance) {
 		this.routeID = routeID;
 		this.sourceAddress = sourceAddress;
 		this.destinationAddress = destinationAddress;
 		this.rate = rate;
+		this.distance = distance;
 	}
 	
 	public RouteRate() {
@@ -20,6 +22,7 @@ public class RouteRate {
 		this.sourceAddress = new Address();
 		this.destinationAddress = new Address();
 		this.rate = 0.0;
+		this.distance = 0.0;
 	}
 
 	public String getRouteID() {
@@ -54,12 +57,18 @@ public class RouteRate {
 		this.rate = rate;
 	}
 
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
 	@Override
 	public String toString() {
 		return "RouteRate [routeID=" + routeID + ", sourceAddress=" + sourceAddress + ", destinationAddress="
-				+ destinationAddress + ", rate=" + rate + "]";
+				+ destinationAddress + ", rate=" + rate + ", distance=" + distance + "]";
 	}
-	
-	
 	
 }
