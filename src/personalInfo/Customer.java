@@ -6,24 +6,21 @@ public class Customer {
 	private String fName;
 	private String lName;
 	private String company;
-	private String contactPerson;
-	private Address address1;
-	private Address address2;
+	private String emergencyNo;
+	private Address address;
 	private String telephone;
 	private String email;
 	private String status;
 	
 	
-	public Customer(String cusID,String fName,String lName,String contactPerson, Address address1, Address address2,
+	public Customer(String cusID,String fName,String lName,String emergencyNo, Address address,
 			String telephone, String email, String company,String status) {
 		this.cusID = cusID;
-		address1.setId(cusID);
-		address2.setId(cusID);
+		address.setId(cusID);
 		this.fName=fName;
 		this.lName=lName;
-		this.contactPerson = contactPerson;
-		this.address1 = address1;
-		this.address2 = address2;
+		this.emergencyNo = emergencyNo;
+		this.address = address;
 		this.telephone = telephone;
 		this.email = email;
 		this.status = status;
@@ -32,9 +29,11 @@ public class Customer {
 	
 	public Customer(Customer customer) {
 		this.cusID = customer.cusID;
-		this.contactPerson = customer.contactPerson;
-		this.address1 = customer.address1;
-		this.address2 = customer.address2;
+		this.fName = customer.fName;
+		this.lName = customer.lName;
+		this.company = customer.company;	
+		this.emergencyNo = customer.emergencyNo;
+		this.address = customer.address;
 		this.telephone = customer.telephone;
 		this.email = customer.email;
 		this.status = customer.status;
@@ -43,9 +42,11 @@ public class Customer {
 	
 	public Customer() {
 		this.cusID = "";
-		this.contactPerson = "";
-		this.address1 = new Address();
-		this.address2 = new Address();
+		this.fName = "";
+		this.lName = "";
+		this.company = "";
+		this.emergencyNo = "";
+		this.address = new Address();
 		this.telephone = "";
 		this.email = "";
 		this.status = "";
@@ -58,24 +59,16 @@ public class Customer {
 	public void setCusID(String cusID) {
 		this.cusID = cusID;
 	}
-	public String getContactPerson() {
-		return contactPerson;
+	public String getEmergencyNo() {
+		return emergencyNo;
 	}
-	public void setContactPerson(String contactPerson) {
-		this.contactPerson = contactPerson;
+	public void setEmergencyNo(String emergencyNo) {
+		this.emergencyNo = emergencyNo;
 	}
-	public Address getAddress1() {
-		return address1;
+	public Address getAddress() {
+		return address;
 	}
-	public void setAddress1(Address address1) {
-		this.address1 = address1;
-	}
-	public Address getAddress2() {
-		return address2;
-	}
-	public void setAddress2(Address address2) {
-		this.address2 = address2;
-	}
+	
 	public String getTelephone() {
 		return telephone;
 	}
@@ -124,7 +117,7 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [cusID=" + cusID + ", fName=" + fName + ", lName=" + lName + ", company=" + company
-				+ ", contactPerson=" + contactPerson + ", address1=" + address1 + ", address2=" + address2
+				+ ", emergency No=" + emergencyNo + "address = " + address
 				+ ", telephone=" + telephone + ", email=" + email + ", status=" + status + "]";
 	}
 	
