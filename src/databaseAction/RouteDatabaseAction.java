@@ -22,19 +22,20 @@ public class RouteDatabaseAction {
     public void addRouteRate(RouteRate routeRate) {
         try {
             // Prepare the SQL statement
-            String sql = "INSERT INTO RouteRate (routeId, rate, sourceStreet, sourceParish, sourceCommunity, destinationStreet, destinationParish, destinationCommunity) " +
-                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO RouteRate (routeId, rate, distance, sourceStreet, sourceParish, sourceCommunity, destinationStreet, destinationParish, destinationCommunity) " +
+                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
             PreparedStatement statement = myConn.prepareStatement(sql);
 
             // Set parameters using RouteRate object
             statement.setString(1, routeRate.getRouteID());
             statement.setDouble(2, routeRate.getRate());
-            statement.setString(3, routeRate.getSourceAddress().getStreetName());
-            statement.setString(4, routeRate.getSourceAddress().getParish());
-            statement.setString(5, routeRate.getSourceAddress().getCommunity());
-            statement.setString(6, routeRate.getDestinationAddress().getStreetName());
-            statement.setString(7, routeRate.getDestinationAddress().getParish());
-            statement.setString(8, routeRate.getDestinationAddress().getCommunity());
+            statement.setDouble(3, routeRate.getDistance());
+            statement.setString(4, routeRate.getSourceAddress().getAddressLine1());
+            statement.setString(5, routeRate.getSourceAddress().getParish());
+            statement.setString(6, routeRate.getSourceAddress().getCommunity());
+            statement.setString(7, routeRate.getDestinationAddress().getAddressLine1());
+            statement.setString(8, routeRate.getDestinationAddress().getParish());
+            statement.setString(9, routeRate.getDestinationAddress().getCommunity());
 
             // Execute the query
             int rowsAffected = statement.executeUpdate();
