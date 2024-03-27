@@ -27,7 +27,7 @@ public class CustomerDatabaseAction {
             }
             
             // Prepare the SQL statement
-            String sql = "INSERT INTO Customer (customerId, fName, lName, email, status, contactPerson, company, telephone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Customer (customerId, fName, lName, email, status, emergencyNo, company, telephone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = myConn.prepareStatement(sql);
 
             // Set the parameters for the statement using the Customer object
@@ -36,7 +36,7 @@ public class CustomerDatabaseAction {
             statement.setString(3, customer.getlName());
             statement.setString(4, customer.getEmail());
             statement.setString(5, customer.getStatus());
-            statement.setString(6, customer.getContactPerson());
+            statement.setString(6, customer.getEmergencyNo());
             statement.setString(7, customer.getCompany());
             statement.setString(8, customer.getTelephone());
 
@@ -54,11 +54,8 @@ public class CustomerDatabaseAction {
             statement.close();
             
             // Check if address line one is blank
-            if (customer.getAddress1().isEmpty()==false) {//if data was entered in address line one then it is added to the database
-            	addAddress(customer.getAddress1());
-            }
-            if (customer.getAddress2().isEmpty()==false) {//if data was entered in address line two then it is added to the database
-                addAddress(customer.getAddress2());
+            if (customer.getAddress().isEmpty()==false) {//if data was entered in address line one then it is added to the database
+            	addAddress(customer.getAddress());
             }
             
         } catch (SQLException e) {
@@ -76,15 +73,16 @@ public class CustomerDatabaseAction {
             }
 
             // Prepare the SQL statement
-            String sql = "INSERT INTO CustomerAddress (customerId, street, community, parish) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO CustomerAddress (customerId, addressLine1, addressLine2, community, parish, country) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = myConn.prepareStatement(sql);
 
             // Set the parameters for the statement using the Address object
             statement.setString(1, address.getId());
-            statement.setString(2, address.getStreetName());
-            statement.setString(3, address.getCommunity());
-            statement.setString(4, address.getParish());
-
+            statement.setString(2, address.getAddressLine1());
+            statement.setString(3, address.getAddressLine2());
+            statement.setString(4, address.getCommunity());
+            statement.setString(5, address.getParish());
+            statement.setString(6, address.getCountry());
             // Execute the insert statement
             int rowsAffected = statement.executeUpdate();
 
@@ -105,12 +103,13 @@ public class CustomerDatabaseAction {
 
     public boolean addressExists(Address address) throws SQLException {
         // Prepare the SQL statement to check if the address already exists
-        String sql = "SELECT COUNT(*) FROM CustomerAddress WHERE customerId = ? AND street = ? AND community = ? AND parish = ?";
+        String sql = "SELECT COUNT(*) FROM CustomerAddress WHERE customerId = ? AND addressLine1 = ? AND addressLine2 = ? AND community = ? AND parish = ?";
         PreparedStatement statement = myConn.prepareStatement(sql);
-        statement.setString(1, address.getId());
-        statement.setString(2, address.getStreetName());
-        statement.setString(3, address.getCommunity());
-        statement.setString(4, address.getParish());
+        statement.setString(1, address.getId()); // Assuming getCustomerId() method exists in the Address class
+        statement.setString(2, address.getAddressLine1());
+        statement.setString(3, address.getAddressLine2());
+        statement.setString(4, address.getCommunity());
+        statement.setString(5, address.getParish());
 
         // Execute the query
         ResultSet resultSet = statement.executeQuery();
@@ -127,6 +126,7 @@ public class CustomerDatabaseAction {
 
         return false; // Return false if the address does not exist
     }
+
     
     public boolean customerExists(String customerId) throws SQLException {
         // Prepare the SQL statement to check if a customer with the given ID exists
