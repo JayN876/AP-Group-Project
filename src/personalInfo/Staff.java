@@ -6,8 +6,7 @@ public class Staff {
     private String firstName;
     private String lastName;
     private Date dob; 
-    private Address address1;
-    private Address address2;
+    private Address address;
     private String telephone;
     private String email;
     private String position;
@@ -15,14 +14,13 @@ public class Staff {
 	private String password;
 	
     // Constructor
-    public Staff(String staffID, String password,String firstName, String lastName, Date dob, Address address1, Address address2, String telephone, String email, String position, String status) {
+    public Staff(String staffID, String password,String firstName, String lastName, Date dob, Address address, String telephone, String email, String position, String status) {
         this.staffID = staffID;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
-        this.address1 = address1;
-        this.address2 = address2;
+        this.address = address;
         this.telephone = telephone;
         this.email = email;
         this.position = position;
@@ -35,8 +33,7 @@ public class Staff {
         this.firstName = "";
         this.lastName = "";
         this.dob = new Date();
-        this.address1 = new Address();
-        this.address2 = new Address();
+        this.address = new Address();
         this.telephone = "000-000-0000";
         this.email = "";
         this.position = "";
@@ -50,8 +47,7 @@ public class Staff {
          this.firstName = staff.firstName;
          this.lastName = staff.lastName;
          this.dob = staff.dob;
-         this.address1 = staff.address1;
-         this.address2 = staff.address2;
+         this.address = staff.address;
          this.telephone = staff.telephone;
          this.email = staff.email;
          this.position = staff.position;
@@ -94,20 +90,12 @@ public class Staff {
         this.dob = dob;
     }
 
-    public Address getAddress1() {
-        return address1;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddress1(Address address1) {
-        this.address1 = address1;
-    }
-
-    public Address getAddress2() {
-        return address2;
-    }
-
-    public void setAddress2(Address address2) {
-        this.address2 = address2;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getTelephone() {
@@ -158,8 +146,7 @@ public class Staff {
                 "\nFirstName='" + firstName  +
                 "\nLastName='" + lastName  +
                 "\nDob=" + dob +
-                "\nAddress1='" + address1  +
-                "\nAddress2='" + address2  +
+                "\nAddress1='" + address  +
                 "\nTelephone='" + telephone  +
                 "\nEmail='" + email  +
                 "\nPosition='" + position  +
