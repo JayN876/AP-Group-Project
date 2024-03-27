@@ -1,8 +1,3 @@
-CREATE DATABASE `approjectdatabase`;
--- DROP DATABASE `approjectdatabase`; 
-
-USE `approjectdatabase`;
-
 CREATE TABLE Staff (
     staffId VARCHAR(50) PRIMARY KEY,
     fName VARCHAR(50),
@@ -87,27 +82,25 @@ CREATE TABLE Customer (
     lName VARCHAR(50),
     email VARCHAR(100),
     status VARCHAR(50),
-    contactPerson VARCHAR(100),
+    emergencyNo VARCHAR(100),
     company VARCHAR(100),
     telephone VARCHAR(20)
 );
 
 CREATE TABLE CustomerAddress (
     customerId VARCHAR(50),
-    street VARCHAR(100),
+    addressLine1 VARCHAR(100),
+    addressLine2 VARCHAR(100),
     community VARCHAR(100),
     parish VARCHAR(100),
+    country VARCHAR(100),
     FOREIGN KEY (customerId) REFERENCES Customer(customerId)
 );
-
-
-
-
-
 
 CREATE TABLE RouteRate (
     routeId VARCHAR(50) PRIMARY KEY,
     rate DOUBLE,
+    distance DOUBLE,
     sourceStreet VARCHAR(100),
    sourceCommunity VARCHAR(100),
     sourceParish VARCHAR(100),   
