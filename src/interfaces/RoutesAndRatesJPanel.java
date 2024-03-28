@@ -20,9 +20,13 @@ import javax.swing.JTextField;
 import databaseAction.RouteDatabaseAction;
 import personalInfo.Address;
 import personalInfo.RouteRate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class RoutesAndRatesJPanel {
 	
+
+	private static final Logger logger = LogManager.getLogger(RoutesAndRatesJPanel.class);	
 	private JLabel headingLabel; 
 	private JLabel sourceLabel;
 	private JTextField sourceStreetField;
@@ -39,6 +43,9 @@ public class RoutesAndRatesJPanel {
 	
 	private JLabel routeIDLabel;
 	private JTextField routeField;
+	
+	private JLabel distanceLabel;
+	private JTextField distanceField;
 	
 	private JButton confirmButton;
 	private JButton clearButton;
@@ -188,14 +195,27 @@ public class RoutesAndRatesJPanel {
 		ratesField = new JTextField();
 		gbc.gridx =1;
 		gbc.gridy=12;
-		ratesField.setColumns(15);
+		ratesField.setColumns(5);
 		panel.add(ratesField,gbc);
+		
+		
+		distanceLabel = new JLabel("Distance (km) : ");
+		gbc.gridy=13;
+		gbc.gridx=0;
+		gbc.anchor = GridBagConstraints.NORTHWEST;
+		panel.add(distanceLabel,gbc);
+		
+		distanceField = new JTextField();
+		gbc.gridx =1;
+		gbc.gridy=13;
+		distanceField.setColumns(5);
+		panel.add(distanceField,gbc);
 		
 		
 		//buttons
 		confirmButton = new JButton("Confirm");
 		gbc.gridx=0;
-		gbc.gridy=13;
+		gbc.gridy=14;
 		gbc.insets= new Insets(10, 0, 0, 0);
 		
 		confirmButton.addActionListener(new ActionListener() {
@@ -205,6 +225,8 @@ public class RoutesAndRatesJPanel {
 		        if (routeField.getText().isEmpty() || sourceStreetField.getText().isEmpty() || sourceCommuityField.getText().isEmpty()
 		                || sourceParishField.getText().isEmpty() || destinationStreetField.getText().isEmpty() || destinationCommuityField.getText().isEmpty()
 		                || destinationParishField.getText().isEmpty() || ratesField.getText().isEmpty()) {
+
+					logger.info("Missing fields when confirm was clicked");
 		            JOptionPane.showMessageDialog(null, "Please fill in all fields.", "Missing Data", JOptionPane.WARNING_MESSAGE);
 		            return;
 		        }
@@ -213,7 +235,7 @@ public class RoutesAndRatesJPanel {
 		        	databaseAction.RouteDatabaseAction routeAction = new RouteDatabaseAction();
 		        	Address sourceAddress = new Address(routeField.getText(), sourceStreetField.getText(), sourceCommuityField.getText(), sourceParishField.getText());
 		        	Address destinationAddress = new Address(routeField.getText(),destinationStreetField.getText(),destinationCommuityField.getText(),sourceParishField.getText());
-		        	RouteRate routeRate = new RouteRate(routeField.getText(), sourceAddress, destinationAddress,Double.parseDouble(ratesField.getText()));
+		        	RouteRate routeRate = new RouteRate(routeField.getText(), sourceAddress, destinationAddress,Double.parseDouble(ratesField.getText()), Double.parseDouble(distanceField.getText()));
 		        	
 		        	if(routeAction.routeExists(routeRate)==false) {
 		        		routeAction.addRouteRate(routeRate);
@@ -227,7 +249,7 @@ public class RoutesAndRatesJPanel {
 		clearButton = new JButton("Clear");
 		gbc.insets= new Insets(10, 30, 0, 0);
 		gbc.gridx=1;
-		gbc.gridy=13;
+		gbc.gridy=14;
 		panel.add(clearButton,gbc);
 		
 		

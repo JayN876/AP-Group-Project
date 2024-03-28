@@ -52,12 +52,10 @@ public class StaffDatabaseAction {
             }
             addDate(staff);
             // Check if address line one is blank
-            if (staff.getAddress1().isEmpty()==false) {//if data was entered in address line one then it is added to the database
+            if (staff.getAddress().isEmpty()==false) {//if data was entered in address line one then it is added to the database
             	addAddressLine1(staff);
             }
-            if (staff.getAddress2().isEmpty()==false) {//if data was entered in address line two then it is added to the database
-                addAddressLine2(staff);
-            }
+
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -155,24 +153,25 @@ public class StaffDatabaseAction {
         }
     }
     
-
-
+    
     public void addAddressLine1(Staff staff) {
         try {           
             // Get the address details for address line 1
-            Address address1 = staff.getAddress1();
+            Address address1 = staff.getAddress();
             
             // Construct the SQL query
-            String sqlString = "INSERT INTO approjectdatabase.staffaddress (staffId,street, parish, community) VALUES (?, ?, ?, ?)";
+            String sqlString = "INSERT INTO StaffAddress (staffId, addressLine1, addressLine2, community, parish, country) VALUES (?, ?, ?, ?, ?, ?)";
 
             // Prepare the SQL statement
             PreparedStatement statement = myConn.prepareStatement(sqlString);
             
             // Set the parameters for address line 1
             statement.setString(1, staff.getStaffID());
-            statement.setString(2, address1.getStreetName());
-            statement.setString(3, address1.getCommunity());
-            statement.setString(4, address1.getParish());
+            statement.setString(2, address1.getAddressLine1());
+            statement.setString(3, address1.getAddressLine2());
+            statement.setString(4, address1.getCommunity());
+            statement.setString(5, address1.getParish());
+            statement.setString(6, address1.getCountry());
 
             // Execute the SQL statement for address line 1
             int rowsAffected = statement.executeUpdate();
@@ -181,39 +180,6 @@ public class StaffDatabaseAction {
                 JOptionPane.showMessageDialog(null, "Address Line 1 Added Successfully", "Address Record Status", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Address Line 1 NOT ADDED", "Address Record Status", JOptionPane.ERROR_MESSAGE);
-            }
-
-            // Close the statement
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void addAddressLine2(Staff staff) {
-        try {
-            // Get the address details for address line 2
-            Address address2 = staff.getAddress2();
-            
-            // Construct the SQL query with placeholders for the values
-            String sqlString = "INSERT INTO approjectdatabase.staffaddress (staffId,street, parish, community) VALUES (?, ?, ?, ?)";
-
-            // Prepare the SQL statement
-            PreparedStatement statement = myConn.prepareStatement(sqlString);
-            
-            // Set the parameters for address line 2
-            statement.setString(1, staff.getStaffID());
-            statement.setString(2, address2.getStreetName());
-            statement.setString(3, address2.getCommunity());
-            statement.setString(4, address2.getParish());
-
-            // Execute the SQL statement for address line 2
-            int rowsAffected = statement.executeUpdate();
-
-            if (rowsAffected == 1) {
-                JOptionPane.showMessageDialog(null, "Address Line 2 Added Successfully", "Address Record Status", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Address Line 2 NOT ADDED", "Address Record Status", JOptionPane.ERROR_MESSAGE);
             }
 
             // Close the statement
