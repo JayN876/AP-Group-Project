@@ -8,12 +8,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.lang.model.element.PackageElement;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,9 +21,13 @@ import personalInfo.Address;
 import personalInfo.Date;
 import personalInfo.Driver;
 import personalInfo.Staff;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class StaffJPanel {
     
+
+	private static final Logger logger = LogManager.getLogger(StaffJPanel.class);	
 	private JLabel staffHeading;
 	private JLabel staffIDLabel;
 	private JTextField staffIDField;
@@ -42,13 +43,11 @@ public class StaffJPanel {
 	private JTextField dobYearField;
 	private JLabel label;
 	private JLabel address1Label;
-	private JTextField streetNameField1;
-	private JTextField communityField1;
-	private JTextField parishField1;
-	private JLabel address2Label;
-	private JTextField streetNameField2;
-	private JTextField communityField2;
-	private JTextField parishField2;
+	private JTextField addressLine1;
+	private JTextField addressLine2;
+	private JTextField communityField;
+	private JTextField parishField;
+	private JTextField countryField;
 	private JTextField telephoneField;
 	private JTextField emailField;
 	private JComboBox<String> positionBox;
@@ -179,122 +178,98 @@ public class StaffJPanel {
         panel.add(new JLabel("___________________________________"),gbc);
         
         gbc= new GridBagConstraints();
-        address1Label = new JLabel("Address 1");
+        address1Label = new JLabel("Address");
         gbc.gridy=6;
+        gbc.gridx=0;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         panel.add(address1Label,gbc);
         
         gbc.gridy=7;
-        label = new JLabel("StreetName: ");
+        gbc.gridx=0;
+        label = new JLabel("Address Line 1: ");
         panel.add(label,gbc);
         
         gbc.gridx =1;
-        streetNameField1 = new JTextField();
-        streetNameField1.setColumns(15);
-        panel.add(streetNameField1,gbc);
+        addressLine1 = new JTextField();
+        addressLine1.setColumns(15);
+        panel.add(addressLine1,gbc);
+        
+        gbc.gridy=8;
+        gbc.gridx=0;
+        label = new JLabel("Address Line 2: ");
+        panel.add(label,gbc);
+        
+        gbc.gridx =1;
+        addressLine2 = new JTextField();
+        addressLine2.setColumns(15);
+        panel.add(addressLine2,gbc);
         
         gbc.gridx =0;
-        gbc.gridy=8;
+        gbc.gridy=9;
         label = new JLabel("Community : ");
         panel.add(label,gbc);
         
         gbc.gridx = 1;
-        communityField1 = new JTextField();
-        communityField1.setColumns(15);
-        panel.add(communityField1,gbc);
+        communityField = new JTextField();
+        communityField.setColumns(15);
+        panel.add(communityField,gbc);
         
-        gbc.gridx=0;
-        gbc.gridy=9;
-        label = new JLabel("Parish : ");
-        panel.add(label,gbc);
-        
-        gbc.gridx=1;
-        parishField1= new JTextField();
-        parishField1.setColumns(15);
-        panel.add(parishField1,gbc);
-        
-        //address 2 JLabel
-        
-        gbc= new GridBagConstraints();
         gbc.gridx=0;
         gbc.gridy=10;
-        gbc.gridwidth=5;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        panel.add(new JLabel("___________________________________"),gbc);
-        
-        
-        gbc= new GridBagConstraints();
-        address2Label = new JLabel("Address 2    (OPTIONAL)");
-        gbc.gridy=11;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.gridwidth=2;
-        panel.add(address2Label,gbc);
-        
-        gbc.gridy=12;
-        label = new JLabel("StreetName: ");
-        panel.add(label,gbc);
-        
-        gbc.gridx =1;
-        streetNameField2 = new JTextField();
-        streetNameField2.setColumns(15);
-        panel.add(streetNameField2,gbc);
-        
-        gbc.gridx =0;
-        gbc.gridy=13;
-        label = new JLabel("Community : ");
-        panel.add(label,gbc);
-        
-        gbc.gridx = 1;
-        communityField2 = new JTextField();
-        communityField2.setColumns(15);
-        panel.add(communityField2,gbc);
-        
-        gbc.gridx=0;
-        gbc.gridy=14;
         label = new JLabel("Parish : ");
         panel.add(label,gbc);
         
         gbc.gridx=1;
-        parishField2= new JTextField();
-        parishField2.setColumns(15);
-        panel.add(parishField2,gbc);
+        parishField= new JTextField();
+        parishField.setColumns(15);
+        panel.add(parishField,gbc);
+        
+        gbc.gridx=0;
+        gbc.gridy=11;
+        label = new JLabel("Country : ");
+        panel.add(label,gbc);
+        
+        gbc.gridx=1;
+        countryField= new JTextField();
+        countryField.setColumns(15);
+        panel.add(countryField,gbc);
         
         gbc= new GridBagConstraints();
         gbc.gridx=0;
-        gbc.gridy=15;
+        gbc.gridy=12;
         gbc.gridwidth=5;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         panel.add(new JLabel("___________________________________"),gbc);
 		
 		gbc.gridx =0;
-        gbc.gridy =16;
+        gbc.gridy =13;
         label = new JLabel("Telephone: ");
         panel.add(label,gbc);
         
         gbc.gridx =1;
-        gbc.gridy =16;
+        gbc.gridy =13;
         telephoneField = new JTextField();
         telephoneField.setColumns(15);
         panel.add(telephoneField,gbc);
         
         gbc.gridx=0;
-        gbc.gridy=17;
+        gbc.gridy=14;
         label = new JLabel("Email: ");
         panel.add(label,gbc);
         
         gbc.gridx=1;
-        gbc.gridy=17;
+        gbc.gridy=14;
         emailField = new JTextField();
         emailField.setColumns(15);
         panel.add(emailField,gbc);
         
         gbc.gridx=0;
-        gbc.gridy=18;
+        gbc.gridy=15;
         label = new JLabel("Position: ");
         panel.add(label,gbc);
         
         gbc.gridx=1;
-        gbc.gridy=18;
+        gbc.gridy=15;
         String empPosition[]= {"Select an Option","Administrative Staff","Drivers","Maintenance Workers"};
         positionBox = new JComboBox<String>(empPosition);
         
@@ -386,14 +361,14 @@ public class StaffJPanel {
         
         //Label for admin staff
         gbc.gridx=0;
-        gbc.gridy=19;
+        gbc.gridy=16;
         staffLabel = new JLabel("Staff Type : ");
         staffLabel.setVisible(false);
         panel.add(staffLabel,gbc);
         
         //Combo box to select type of admin staff
         gbc.gridx=1;
-        gbc.gridy=19;
+        gbc.gridy=16;
         String adminStaffPosition[]= {"Administrative Clerk","Manager","Supervisor","HR Manager"};
         
         adminPositionBox = new JComboBox<String>(adminStaffPosition);
@@ -402,13 +377,13 @@ public class StaffJPanel {
         
         //Label for Admin ID
         gbc.gridx=0;
-        gbc.gridy=20;
+        gbc.gridy=17;
         adminIDLabel = new JLabel("Admin ID : ");
         adminIDLabel.setVisible(false);
         panel.add(adminIDLabel,gbc);
         
         gbc.gridx=1;
-        gbc.gridy=20;
+        gbc.gridy=17;
         adminField = new JTextField();
         adminField.setVisible(false);
         adminField.setColumns(15);
@@ -418,13 +393,13 @@ public class StaffJPanel {
         
         //Label for constractorID
         gbc.gridx=0;
-        gbc.gridy=19;
+        gbc.gridy=16;
         contractorLabel = new JLabel("Contractor ID ");
         contractorLabel.setVisible(false);
         panel.add(contractorLabel,gbc);
         
         gbc.gridx=1;
-        gbc.gridy=19;
+        gbc.gridy=16;
         conIDField = new JTextField();
         conIDField.setVisible(false);
         conIDField.setColumns(15);
@@ -436,13 +411,13 @@ public class StaffJPanel {
         //special attributes for maintenance worker
         
         gbc.gridx=0;
-        gbc.gridy=20;
+        gbc.gridy=17;
         skillSetLabel = new JLabel("SkillSet : ");
         skillSetLabel.setVisible(false);
         panel.add(skillSetLabel,gbc);
         
         gbc.gridx=1;
-        gbc.gridy=20;
+        gbc.gridy=17;
         String skillSets[]= {"Vehicle Maintenance","Facility Maintenance","IT Maintenance"};  
         skillSetPositionBox = new JComboBox<String>(skillSets);
         skillSetPositionBox.setVisible(false);
@@ -450,13 +425,13 @@ public class StaffJPanel {
         
         //special attribute for driver
         gbc.gridx=0;
-        gbc.gridy=20;
+        gbc.gridy=17;
         plateNumLabel = new JLabel("Plate Number : ");
         plateNumLabel.setVisible(false);
         panel.add(plateNumLabel,gbc);
         
         gbc.gridx=1;
-        gbc.gridy=20;
+        gbc.gridy=17;
         plateNumField = new JTextField();
         plateNumField.setVisible(false);
         plateNumField.setColumns(15);
@@ -464,7 +439,7 @@ public class StaffJPanel {
         
         //setting ID Label
         gbc.gridx = 0;
-        gbc.gridy = 21; // Next row
+        gbc.gridy = 18; // Next row
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets=new Insets(0, 0, 0, 0);
         passwordLabel = new JLabel("Password :  ");
@@ -473,25 +448,25 @@ public class StaffJPanel {
         //setting ID TextArea
         passwordField = new JTextField();
         gbc.gridx =1;
-        gbc.gridy=21;     
+        gbc.gridy=18;     
         passwordField.setColumns(10);
         panel.add(passwordField,gbc);
         
         gbc=new GridBagConstraints();
         gbc.gridx=0;
-        gbc.gridy=22;
+        gbc.gridy=19;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         label = new JLabel("Status: ");
         panel.add(label,gbc);
         
         gbc.gridx=1;
-        gbc.gridy=22;
+        gbc.gridy=19;
         String status[] = {"active","inactive"};
         statusBox = new JComboBox<String>(status);
         panel.add(statusBox,gbc);
         
         gbc.gridx=0;
-        gbc.gridy=23;
+        gbc.gridy=20;
         confirmButton = new JButton("Confirm");
         gbc.insets = new Insets(20, 0, 0, 0);
         
@@ -506,16 +481,15 @@ public class StaffJPanel {
                 boolean dobEmpty = dobMonthField.getText().isEmpty() || dobDayField.getText().isEmpty() || dobYearField.getText().isEmpty();
                 boolean positionEmpty = positionBox.getSelectedIndex() == 0;
                 
-                boolean parish = parishField1.getText().isEmpty();
+                boolean parish = parishField.getText().isEmpty();
                 boolean staffType = staffIDField.getText().isEmpty();
                 boolean adminId = adminField.getText().isEmpty();
             	boolean password = passwordField.getText().isEmpty()|| passwordField.getText().length()<8;
             	boolean telephone = telephoneField.getText().isEmpty();
             	boolean email = emailField.getText().isEmpty();
                 // Check if elements of address one is empty
-                boolean addressOneEmpty = (streetNameField1.getText().isEmpty() && communityField1.getText().isEmpty()) || parishField1.getText().isEmpty();
-                // Check if element of address two is empty
-                boolean addressTwoEmpty = (streetNameField2.getText().isEmpty() && communityField2.getText().isEmpty()) || parishField2.getText().isEmpty();
+                boolean addressOneEmpty = (addressLine1.getText().isEmpty() && addressLine2.getText().isEmpty())||communityField.getText().isEmpty()|| parishField.getText().isEmpty()||countryField.getText().isEmpty();
+               
                 Boolean contID= conIDField.getText().isEmpty();
                 Boolean plateNum = plateNumField.getText().isEmpty();
                 
@@ -523,14 +497,15 @@ public class StaffJPanel {
                 
 
                 
-                if (staffIDEmpty || firstNameEmpty || lastNameEmpty || dobEmpty || positionEmpty||(addressOneEmpty && addressTwoEmpty)||telephone|| email) {
+                if (staffIDEmpty || firstNameEmpty || lastNameEmpty || dobEmpty || positionEmpty||addressOneEmpty||telephone|| email) {
                     
+                    logger.info("Staff form is Incomplete");
                     if (staffIDEmpty) errorMessage += "- Staff ID\n";
                     if (firstNameEmpty) errorMessage += "- First Name\n";
                     if (lastNameEmpty) errorMessage += "- Last Name\n";
                     if (dobEmpty) errorMessage += "- Date of Birth\n";
                     if (positionEmpty) errorMessage += "- Position\n";
-                    if (addressOneEmpty && addressTwoEmpty) errorMessage +="- StreetName or Community and Parish (Address 1 or Address 2)\n";
+                    if (addressOneEmpty) errorMessage +="- Address Field is incomplete\n";
                     if (telephone) errorMessage+= "- Telephone\n";
                     if (email) errorMessage +="- Email\n";
                     JOptionPane.showMessageDialog(null, errorMessage, "Incomplete Information", JOptionPane.WARNING_MESSAGE);
@@ -539,6 +514,7 @@ public class StaffJPanel {
                 
                 if (adminIDLabel.isVisible()&&(staffType || adminId || password)) {
                     
+                    logger.info("Staff form is Incomplete");
                 	if(staffType) errorMessage += "- StaffType\n";;
                 	if(adminId) errorMessage +="- AdminID\n";
                 	if(password) errorMessage +="- Password( 8 characters)\n";
@@ -547,6 +523,8 @@ public class StaffJPanel {
                 }
                 //if driver was selected ensure contractor id and platenumber is not blank
                 else if(positionBox.getSelectedIndex()==2&&(contID||plateNum)) {
+
+                    logger.info("Staff form is Incomplete");
                 	if(contID) errorMessage += "- ContractorID\n";;
                 	if(plateNum) errorMessage +="- PlateNumber\n";
                 	JOptionPane.showMessageDialog(null, errorMessage, "Incomplete Information", JOptionPane.WARNING_MESSAGE);
@@ -554,6 +532,8 @@ public class StaffJPanel {
                 }
                 //if maintenance worker is selected ensure contractor id is not blank
                 else if(positionBox.getSelectedIndex()==3&&contID) {
+
+                    logger.info("Staff form is Incomplete");
                 	if(contID) errorMessage += "- ContractorID\n";
                 	JOptionPane.showMessageDialog(null, errorMessage, "Incomplete Information", JOptionPane.WARNING_MESSAGE);
                 	return;
@@ -562,9 +542,9 @@ public class StaffJPanel {
                 
                 //Convert data retrieved from text field to integer to match date primary constructor
             	Date dob = new Date(Integer.parseInt(dobDayField.getText()),Integer.parseInt(dobMonthField.getText()),Integer.parseInt(dobYearField.getText()));
-            	Address address1 = new Address(staffIDField.getText(), streetNameField1.getText(), communityField1.getText(), parishField1.getText());
-            	Address address2 = new Address(staffIDField.getText(), streetNameField2.getText(), communityField2.getText(), parishField2.getText());
-        		Staff staff = new Staff(staffIDField.getText(),passwordField.getText(),fNameField.getText(),lNameField.getText(),dob,address1,address2,telephoneField.getText(),emailField.getText(),(String)positionBox.getSelectedItem(),(String)statusBox.getSelectedItem());
+            	Address address = new Address(staffIDField.getText(), addressLine1.getText(),addressLine2.getText() ,communityField.getText(), parishField.getText(),countryField.getText());
+
+        		Staff staff = new Staff(staffIDField.getText(),passwordField.getText(),fNameField.getText(),lNameField.getText(),dob,address,telephoneField.getText(),emailField.getText(),(String)positionBox.getSelectedItem(),(String)statusBox.getSelectedItem());
         		
         		
                 String selectedOption = (String) positionBox.getSelectedItem();
@@ -612,7 +592,7 @@ public class StaffJPanel {
         panel.add(confirmButton,gbc);
                 
         gbc.gridx=1;
-        gbc.gridy=23;
+        gbc.gridy=20;
         clearButton = new JButton("Clear");
         gbc.insets = new Insets(20, 30, 0, 0);
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -627,12 +607,6 @@ public class StaffJPanel {
                 dobMonthField.setText("");
                 dobDayField.setText("");
                 dobYearField.setText("");
-                streetNameField1.setText("");
-                communityField1.setText("");
-                parishField1.setText("");
-                streetNameField2.setText("");
-                communityField2.setText("");
-                parishField2.setText("");
                 telephoneField.setText("");
                 emailField.setText("");
                 // Clear selection for JComboBoxes
