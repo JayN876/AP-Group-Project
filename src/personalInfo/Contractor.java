@@ -4,9 +4,9 @@ public class Contractor extends Staff {
 	
 	private String contratorID;
 
-	public Contractor(String staffID,String password ,String firstName, String lastName, Date dob, Address address1, Address address2,
+	public Contractor(String staffID,String password ,String firstName, String lastName, Date dob, Address address,
 			String telephone, String email, String position, String status, String contratorID) {
-		super(staffID, password, firstName, lastName, dob, address1, address2, telephone, email, position, status);
+		super(staffID, password, firstName, lastName, dob, address, telephone, email, position, status);
 		this.contratorID = contratorID;
 	}
 	
