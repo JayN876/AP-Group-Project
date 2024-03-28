@@ -7,10 +7,10 @@ public class Admin extends Staff{
 	private String adminPosition;
 	
 	
-	public Admin(String staffID, String password,String firstName, String lastName, Date dob, Address address1,
-			Address address2, String telephone, String email, String staffPosition, String status, String adminID,
+	public Admin(String staffID, String password,String firstName, String lastName, Date dob, Address address,
+			String telephone, String email, String staffPosition, String status, String adminID,
 			String action, String adminPosition) {
-		super(staffID, password,firstName, lastName, dob, address1, address2, telephone, email, staffPosition, status);
+		super(staffID, password,firstName, lastName, dob, address, telephone, email, staffPosition, status);
 		this.adminID = adminID;
 		this.action = action;
 		this.adminPosition = adminPosition;

@@ -4,10 +4,10 @@ public class Maintenance extends Contractor{
 
 	private String skillSet;
 
-	public Maintenance(String staffID, String password,String firstName, String lastName, Date dob, Address address1,
-			Address address2, String telephone, String email, String position, String status, String contratorID,
+	public Maintenance(String staffID, String password,String firstName, String lastName, Date dob, Address address,
+			String telephone, String email, String position, String status, String contratorID,
 			String skillSetString) {
-		super(staffID, password,firstName, lastName, dob, address1, address2, telephone, email, position, status, contratorID);
+		super(staffID, password,firstName, lastName, dob, address, telephone, email, position, status, contratorID);
 		this.skillSet = skillSetString;
 	}
 	

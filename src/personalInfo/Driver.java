@@ -4,10 +4,10 @@ public class Driver extends Contractor{
 	
 	private String plateNumber;
 
-	public Driver(String staffID, String password ,String firstName, String lastName, Date dob, Address address1,
-			Address address2, String telephone, String email, String position, String status, String contratorID,
+	public Driver(String staffID, String password ,String firstName, String lastName, Date dob, Address address,
+			String telephone, String email, String position, String status, String contratorID,
 			String plateNumber) {
-		super(staffID, password,firstName, lastName, dob, address1, address2, telephone, email, position, status, contratorID);
+		super(staffID, password,firstName, lastName, dob, address, telephone, email, position, status, contratorID);
 		this.plateNumber = plateNumber;
 	}
 
