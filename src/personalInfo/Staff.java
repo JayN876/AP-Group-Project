@@ -2,16 +2,16 @@ package personalInfo;
 
 public class Staff {
 	
-    private String staffID;
-    private String firstName;
-    private String lastName;
-    private Date dob; 
-    private Address address;
-    private String telephone;
-    private String email;
-    private String position;
-    private String status;
-	private String password;
+    protected String staffID;
+    protected String firstName;
+    protected String lastName;
+    protected Date dob; 
+    protected Address address;
+    protected String telephone;
+    protected String email;
+    protected String position;
+    protected String status;
+    protected String password;
 	
     // Constructor
     public Staff(String staffID, String password,String firstName, String lastName, Date dob, Address address, String telephone, String email, String position, String status) {
