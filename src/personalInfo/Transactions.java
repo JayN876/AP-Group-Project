@@ -1,50 +1,83 @@
 package personalInfo;
 
-public class Transactions {
-	private String transactionNo;
-	private Date transactionDate;
-	private double payment;
-	
-	public Transactions(String transactionNo, Date transactionDate, double payment) {
-		this.transactionNo = transactionNo;
-		this.transactionDate = transactionDate;
-		this.payment = payment;
-	}
-	
-	public Transactions() {
-		this.transactionNo = "";
-		this.transactionDate = new Date();
-		this.payment = 0.0;
-	}
+import java.util.Date;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-	public String getTransactionNo() {
-		return transactionNo;
-	}
+public class Transactions extends JFrame {
+    private JLabel transactionNoLabel, transactionDateLabel, customerIDLabel, orderInvoiceNoLabel, paymentLabel;
+    private JTextField transactionNoField, transactionDateField, customerIDField, orderInvoiceNoField, paymentField;
+    private JButton confirmButton, clearButton;
 
-	public void setTransactionNo(String transactionNo) {
-		this.transactionNo = transactionNo;
-	}
+    public Transactions() {
+        setTitle("Transactions");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 300);
 
-	public Date getTransactionDate() {
-		return transactionDate;
-	}
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(7, 2));
 
-	public void setTransactionDate(Date transactionDate) {
-		this.transactionDate = transactionDate;
-	}
+        transactionNoLabel = new JLabel("Transaction No:");
+        transactionDateLabel = new JLabel("Transaction Date:");
+        customerIDLabel = new JLabel("Customer ID:");
+        orderInvoiceNoLabel = new JLabel("Order Invoice No:");
+        paymentLabel = new JLabel("Payment:");
 
-	public double getPayment() {
-		return payment;
-	}
+        transactionNoField = new JTextField();
+        transactionDateField = new JTextField();
+        customerIDField = new JTextField();
+        orderInvoiceNoField = new JTextField();
+        paymentField = new JTextField();
 
-	public void setPayment(double payment) {
-		this.payment = payment;
-	}
+        panel.add(transactionNoLabel);
+        panel.add(transactionNoField);
+        panel.add(transactionDateLabel);
+        panel.add(transactionDateField);
+        panel.add(customerIDLabel);
+        panel.add(customerIDField);
+        panel.add(orderInvoiceNoLabel);
+        panel.add(orderInvoiceNoField);
+        panel.add(paymentLabel);
+        panel.add(paymentField);
 
-	@Override
-	public String toString() {
-		return "Transactions [transactionNo=" + transactionNo + ", transactionDate=" + transactionDate + ", payment="
-				+ payment + "]";
-	}
+        confirmButton = new JButton("Confirm");
+        clearButton = new JButton("Clear");
 
+        confirmButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Action to be performed when confirm button is clicked
+                // You can add your logic here
+            }
+        });
+
+        clearButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Action to be performed when clear button is clicked
+                transactionNoField.setText("");
+                transactionDateField.setText("");
+                customerIDField.setText("");
+                orderInvoiceNoField.setText("");
+                paymentField.setText("");
+            }
+        });
+
+        panel.add(confirmButton);
+        panel.add(clearButton);
+
+        JButton accessTransactionsButton = new JButton("Access Transactions");
+        accessTransactionsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setVisible(true);
+            }
+        });
+        panel.add(accessTransactionsButton);
+
+        add(panel);
+        setVisible(false); // Hide initially
+    }
+
+    public static void main(String[] args) {
+        new Transactions();
+    }
 }
