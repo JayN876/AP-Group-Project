@@ -1,79 +1,53 @@
 package personalInfo;
 
-import java.util.Date;
 
-//Abstract class for all employees
-abstract class EmployeeSalary {
- protected int staffId;
- protected Date startDate;
- protected Date endDate;
+public class EmployeeSalary {
 
- public EmployeeSalary (int staffId, Date startDate, Date endDate) {
-     this.staffId = staffId;
-     this.startDate = startDate;
-     this.endDate = endDate;
- }
+	private String paySlipID;
+	private int staffId;
+	private String startDate;
+	private String endDate;
+	private Double salary;
+	public EmployeeSalary(String paySlipID, int staffId, String startDate, String endDate, Double salary) {
+		super();
+		this.paySlipID = paySlipID;
+		this.staffId = staffId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.salary = salary;
+	}
+	public String getPaySlipID() {
+		return paySlipID;
+	}
+	public void setPaySlipID(String paySlipID) {
+		this.paySlipID = paySlipID;
+	}
+	public int getStaffId() {
+		return staffId;
+	}
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
+	public String getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	public Double getSalary() {
+		return salary;
+	}
+	public void setSalary(Double salary) {
+		this.salary = salary;
+	}
+	
+	
 
- public abstract double calculateSalary();
-}
-}
-//Concrete class for Administrative Worker
-public class AdministrativeWorker extends EmployeeSalary {
- private double salary;
 
- public AdministrativeWorker(int staffId, Date startDate, Date endDate, double salary) {
-     super(staffId, startDate, endDate);
-     this.salary = salary;
- }
-
- @Override
- public double calculateSalary() {
-     return salary;
- }
-}
-
-//Concrete class for Maintenance Worker
-class MaintenanceWorker extends EmployeeSalary {
- private double salary;
-
- public MaintenanceWorker(int staffId, Date startDate, Date endDate, double salary) {
-     super(staffId, startDate, endDate);
-     this.salary = salary;
- }
-
- @Override
- public double calculateSalary() {
-     return salary;
- }
-}
-
-
-class Driver extends EmployeeSalary {
- private int trips;
- private double earningsPerTrip;
-
- public Driver(int staffId, Date startDate, Date endDate, int trips, double earningsPerTrip) {
-     super(staffId, startDate, endDate);
-     this.trips = trips;
-     this.earningsPerTrip = earningsPerTrip;
- }
-
- @Override
- public double calculateSalary() {
-     return trips * earningsPerTrip * 0.3; // 30% of total earnings from trips
- }
-}
-
-//Salary Calculator class
-
- public static void main(String[] args) {
-     
-     AdministrativeWorker adminWorker = new AdministrativeWorker(101, new Date(), new Date(), 3000);
-     MaintenanceWorker maintenanceWorker = new MaintenanceWorker(102, new Date(), new Date(), 2500);
-     Driver driver = new Driver(103, new Date(), new Date(), 20, 100); // 20 trips, $100 earnings per trip
-
-     System.out.println("Salary for Administrative Worker: $" + adminWorker.calculateSalary());
-     System.out.println("Salary for Maintenance Worker: $" + maintenanceWorker.calculateSalary());
-     System.out.println("Salary for Driver: $" + driver.calculateSalary());
- }
 }
