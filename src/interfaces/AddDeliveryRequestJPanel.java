@@ -6,9 +6,11 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import beans.CompanyRepresentative;
+import beans.CreateDeliveryRequest;
 import beans.DeliveryDriver;
 import beans.DeliveryRoute;
 import databaseAction.DeliveryRequestAction;
@@ -60,10 +63,11 @@ public class AddDeliveryRequestJPanel {
 	private JLabel lblOrderDate;
 	private DeliveryRequestAction deliveryAction;
 	
-	
-	private String selectedCustomerId;
-	private String routeId;
-	private String plateNumber;
+	private final PropertyLoader _propertyLoader = new PropertyLoader(
+			"DeliveryRequestPreparedStatements.properties");
+	private final Properties _properties;
+
+	private CreateDeliveryRequest deliveryRequest;
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -76,6 +80,8 @@ public class AddDeliveryRequestJPanel {
 		panel.setLayout(gbl_panel);
 		gbc = new GridBagConstraints();
 		gbc.insets = new Insets(0, 0, 5, 0);
+		
+		_properties = _propertyLoader.getProperties();
 
 		// Labels
 		headingJLabel = new JLabel("Delivery Request");
@@ -203,6 +209,7 @@ public class AddDeliveryRequestJPanel {
 				CompanyRepresentative rep = (CompanyRepresentative) cbxCustomer.getSelectedItem();
 				DeliveryRoute route = (DeliveryRoute)cbxDeliveryRoute.getSelectedItem();
 				DeliveryDriver driver = (DeliveryDriver)cbxDeliveryDriver.getSelectedItem();
+				String selectedCustomerId = null, routeId = null,plateNumber = null;
 				if(rep != null) {
 					selectedCustomerId = rep.getCustomerId();
 				}
@@ -215,6 +222,20 @@ public class AddDeliveryRequestJPanel {
 					plateNumber = driver.getPlateNumber();
 				}
 				
+				
+				LocalDate orderDate = LocalDate.now()
+						.withDayOfYear(dpOrderDate.getModel().getYear())
+						.withMonth(dpOrderDate.getModel().getMonth())
+						.withDayOfMonth(dpOrderDate.getModel().getDay());
+				
+				deliveryRequest = new CreateDeliveryRequest(selectedCustomerId, routeId, plateNumber, _properties.getProperty("CURRENT_USER"), orderDate);
+				
+				boolean isSuccessful = deliveryAction.createDelivery(deliveryRequest);
+				if (isSuccessful == true) {
+	                JOptionPane.showMessageDialog(null, "Record inserted successfully.", "Delivery Request", JOptionPane.INFORMATION_MESSAGE);
+	            } else {
+	                JOptionPane.showMessageDialog(null, "Record Failed to insert data.", "Delivery Request", JOptionPane.ERROR_MESSAGE);
+	            }
 				
 				System.out.println(selectedCustomerId);
 			}
